@@ -18,7 +18,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Configure CORS
 const corsOptions = {
-  origin: "http://localhost:5173", // Your frontend's origin
+  origin: "http://localhost:3000", // Your frontend's origin
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
