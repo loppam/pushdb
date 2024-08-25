@@ -30,7 +30,8 @@ const startServer = async () => {
   try {
     const MONGO_URL = process.env.MONGO_URL;
     const PORT = process.env.PORT || 3000;
-    const BASE_URL = process.env.BASE_URL || "http://localhost:3000/uploads";
+    const BASE_URL =
+      process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
 
     // Connect to MongoDB using mongoose
     await mongoose.connect(MONGO_URL);
@@ -108,7 +109,8 @@ app.post("/art/upload", upload.single("file"), (req, res) => {
 
 // Get all art details including image metadata
 app.get("/art", (req, res) => {
-  const BASE_URL = process.env.BASE_URL || "http://localhost:3000/uploads";
+  const BASE_URL =
+    process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
 
   db.collection("art")
     .aggregate([
@@ -122,7 +124,9 @@ app.get("/art", (req, res) => {
       },
       {
         $addFields: {
-          "image.url": { $concat: [BASE_URL, "/", { $arrayElemAt: ["$image.filename", 0] }] },
+          "image.url": {
+            $concat: [BASE_URL, "/", { $arrayElemAt: ["$image.filename", 0] }],
+          },
         },
       },
     ])
@@ -137,7 +141,8 @@ app.get("/art", (req, res) => {
 
 // Get a specific art ID including image metadata
 app.get("/art/:id", (req, res) => {
-  const BASE_URL = process.env.BASE_URL || "http://localhost:3000/uploads";
+  const BASE_URL =
+    process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
 
   let id;
   try {
@@ -159,7 +164,9 @@ app.get("/art/:id", (req, res) => {
       },
       {
         $addFields: {
-          "image.url": { $concat: [BASE_URL, "/", { $arrayElemAt: ["$image.filename", 0] }] },
+          "image.url": {
+            $concat: [BASE_URL, "/", { $arrayElemAt: ["$image.filename", 0] }],
+          },
         },
       },
     ])
