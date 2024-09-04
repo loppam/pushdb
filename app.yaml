@@ -1,0 +1,8 @@
+#[START app_yaml]
+runtime: custom
+env: flex
+env_variables:
+  GOOGLE_CLOUD_PROJECT: "ololade-sule"
+  GCLOUD_STORAGE_BUCKET: "ololade-sule_bucket"  # Assuming this is your new bucket name
+
+service: default

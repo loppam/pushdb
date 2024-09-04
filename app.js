@@ -18,7 +18,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Configure CORS
 const corsOptions = {
-  origin: "http://localhost:3000", // Your frontend's origin
+  origin: ['https://ololade-sule.wl.r.appspot.com', 'http://localhost:3000'], // Your frontend's origin
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
@@ -31,7 +31,7 @@ const startServer = async () => {
     const MONGO_URL = process.env.MONGO_URL;
     const PORT = process.env.PORT || 3000;
     const BASE_URL =
-      process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
+      process.env.BASE_URL || "https://ololade-sule.wl.r.appspot.com/uploads";
 
     // Connect to MongoDB using mongoose
     await mongoose.connect(MONGO_URL);
@@ -50,7 +50,7 @@ const startServer = async () => {
     });
 
     // Start the server
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
@@ -110,7 +110,7 @@ app.post("/art/upload", upload.single("file"), (req, res) => {
 // Get all art details including image metadata
 app.get("/art", (req, res) => {
   const BASE_URL =
-    process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
+    process.env.BASE_URL || "https://ololade-sule.wl.r.appspot.com/uploads";
 
   db.collection("art")
     .aggregate([
@@ -142,7 +142,7 @@ app.get("/art", (req, res) => {
 // Get a specific art ID including image metadata
 app.get("/art/:id", (req, res) => {
   const BASE_URL =
-    process.env.BASE_URL || "https://pushdb.onrender.com/uploads";
+    process.env.BASE_URL || "https://ololade-sule.wl.r.appspot.com/uploads";
 
   let id;
   try {
